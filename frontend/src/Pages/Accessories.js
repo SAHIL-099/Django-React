@@ -8,6 +8,13 @@ import img3 from "../images/AC/3.png";
 import img4 from "../images/AC/4.png";
 
 function Accessories() {
+  const [products, setProducts] = useState([])
+  useEffect(()=>{
+    axios.get("http://127.0.0.1:8000/product/").then((data)=>{
+        setProducts(data.data)
+    })
+    .catch((e)=>{console.log(e)})
+},[])
   return (
     <div>
       <header>
@@ -36,7 +43,7 @@ function Accessories() {
 
       <main>
         <div className="test">
-          <div className="product">
+          {/* <div className="product">
             <Link to="#"><img src={img1} alt="BANDOOK TRACTION CRICKET BAT GRIP 1 PIECE" /></Link>
             <div className="info">
               <p className="name">BANDOOK TRACTION CRICKET BAT GRIP 1 PIECE</p>
@@ -78,7 +85,15 @@ function Accessories() {
             <div class="buttons">
                    <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
                 </div>
-          </div>
+          </div> */}
+
+          {
+          products.map((val,i)=>{
+            return(
+              <Card product={val} key={i}/>
+            )
+          })
+        }
         </div>
       </main>
 

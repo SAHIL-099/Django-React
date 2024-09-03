@@ -10,6 +10,12 @@ import black_mamba from "../images/ST/black_mamba.png";
 import smasher from "../images/ST/smasher.png";
 
 function SoftTennis() {
+  useEffect(()=>{
+    axios.get("http://127.0.0.1:8000/product/").then((data)=>{
+        setProducts(data.data)
+    })
+    .catch((e)=>{console.log(e)})
+},[])
   return (
     <div>
       <header>
@@ -38,7 +44,7 @@ function SoftTennis() {
 
       <main>
         <div className="test">
-          <div className="product">
+          {/* <div className="product">
             <Link to="#"><img src={burn_4_scoop} alt="Bandook Bat Upper Blade Players Edition - Diamond Cut Burn Edition" /></Link>
             <div className="info">
               <p className="name">Kwesports Bandook Burn Edition Soft - Players Edition 4 scoop</p>
@@ -126,8 +132,15 @@ function SoftTennis() {
             <div class="buttons">
                    <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
                 </div>
-          </div>
-        </div>
+          </div> */}
+{
+          products.map((val,i)=>{
+            return(
+              <Card product={val} key={i}/>
+            )
+          })
+        }
+        </div> 
       </main>
 
       <footer>

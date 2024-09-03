@@ -8,6 +8,13 @@ import gill from "../images/SB/gill.png";
 import msd from "../images/SB/msd.png";
 
 function SeasonBat() {
+  const [products, setProducts] = useState([])
+  useEffect(()=>{
+    axios.get("http://127.0.0.1:8000/product/").then((data)=>{
+        setProducts(data.data)
+    })
+    .catch((e)=>{console.log(e)})
+},[])
   return (
     <div>
       <header>
@@ -36,7 +43,7 @@ function SeasonBat() {
 
       <main>
         <div className="test">
-          <div className="product">
+          {/* <div className="product">
             <Link to="#"><img src={rs} alt="Kwesports Training Edition - Season Cricket Bat" /></Link>
             <div className="info">
               <p className="name">Kwesports Training Edition - Season Cricket Bat</p>
@@ -94,7 +101,15 @@ function SeasonBat() {
             <div class="buttons">
                    <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
                 </div>
-          </div>
+          </div> */}
+
+          {
+          products.map((val,i)=>{
+            return(
+              <Card product={val} key={i}/>
+            )
+          })
+        }
         </div>
       </main>
 

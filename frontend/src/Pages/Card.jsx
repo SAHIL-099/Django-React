@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import diamond_shape from "../images/HT/dimond_shape.png";
+// import diamond_shape from "../images/HT/dimond_shape.png";
 
 const Card = (prop)=>{
     return(
         <div className="product">
-        <Link to="#"><img src={diamond_shape} alt="Kwesports Bandook bat Diamond Cut Kashmir Willow Hard Tennis Bat" /></Link>
+        <Link to="#"><img src={prop.product.img} alt={prop.product.name} /></Link>
         <div className="info">
           <Link to="#"><p className="name">{prop.product.name}</p></Link>
           <p className="price">

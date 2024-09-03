@@ -1,6 +1,7 @@
 from django.contrib import admin
-from CricketBats.models import User,Product
+from CricketBats.models import User,Product,Accessories
 # Register your models here.
 
 admin.site.register(User)
 admin.site.register(Product)
+admin.site.register(Accessories)

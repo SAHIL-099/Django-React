@@ -12,7 +12,7 @@ class ProductView(APIView):
     serializer_class = ProductSerializer
 
     def get(self,request):
-        product = [ {"name": product.name,"product": product.description,  "price": product.price} for product in Product.objects.all()]
+        product = [ {"img":product.img,"name": product.name,"product": product.description, "price": product.price,"size":product.size,"weight":product.weight,"width":product.width} for product in Product.objects.all()]
         return Response(product) 
     def post(self,request):
         serializer = self.serializer_class(data=request.data)
