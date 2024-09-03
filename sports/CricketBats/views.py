@@ -23,6 +23,26 @@ class ProductView(APIView):
             return Response(serializer.data)
 
         return  Response(serializer.errors)
+    
+    
+    
+class UserView(APIView):
+     serializer_class = UserSerializer
+     def get(self,request):
+         user=[{"fullname":user.fullname,"gender":user.gender,"address":user.address,"mobile":user.mobile,"email":user.email,"password":user.password,"img":user.image} for user in User.objects.all()]
+         
+         return Response(user)
+     
+     def post(self,request):
+         serializer = self.serializer_class(data=request.data)
+         if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data)
+         
+         return Response(serializer.errors)
+     
+     
+
 
 
     
