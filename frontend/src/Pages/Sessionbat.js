@@ -1,13 +1,15 @@
 import React from 'react';
+import { useState,useEffect } from 'react';
+import axios  from 'axios';
+import Card from './Card.jsx';
 import { Link } from 'react-router-dom';
 import "../Css/hard_tennis.css";
+import Authorize from './Authorize.jsx';
 import { logo, search, user, cart, facebook, insta, youtube } from './images.js';
-import rs from "../images/SB/rs.png";
-import vk from "../images/SB/vk.png";
-import gill from "../images/SB/gill.png";
-import msd from "../images/SB/msd.png";
+
 
 function SeasonBat() {
+  const {isAuthenticated } = Authorize();
   const [products, setProducts] = useState([])
   useEffect(()=>{
     axios.get("http://127.0.0.1:8000/product/").then((data)=>{
@@ -32,7 +34,11 @@ function SeasonBat() {
           </nav>
           <div className="nav-icons">
             <Link to="#"><img src={search} alt="Search" /></Link>
-            <Link to="/login"><img src={user} alt="User" /></Link>
+            {isAuthenticated ? (
+                            <Link to="/profile"><img src={user} alt="User" /></Link>
+                        ) : (
+                            <Link to="/login"><img src={user} alt="User" /></Link>
+                        )}
             <Link to="/cart"><img src={cart} alt="Cart" /></Link>
           </div>
         </div>
@@ -40,76 +46,15 @@ function SeasonBat() {
           <p>CUSTOMER SUPPORT - 1234567890 - 2244668899</p>
         </div>
       </header>
-
       <main>
         <div className="test">
-          {/* <div className="product">
-            <Link to="#"><img src={rs} alt="Kwesports Training Edition - Season Cricket Bat" /></Link>
-            <div className="info">
-              <p className="name">Kwesports Training Edition - Season Cricket Bat</p>
-              <p className="price">
-                <span className="original">Rs. 2,300.00</span>
-                <span className="discounted">Rs. 2,000.00</span>
-              </p>
-              <p className="savings">Save Rs. 300.00</p>
-            </div>
-            <div class="buttons">
-                   <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
-                </div>
-          </div>
-
-          <div className="product">
-            <Link to="#"><img src={vk} alt="HYBRID VK18 EDITION" /></Link>
-            <div className="info">
-              <p className="name">HYBRID VK18 EDITION</p>
-              <p className="price">
-                <span className="original">Rs. 3,300.00</span>
-                <span className="discounted">Rs. 3,000.00</span>
-              </p>
-              <p className="savings">Save Rs. 300.00</p>
-            </div>
-            <div class="buttons">
-                   <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
-                </div>
-          </div>
-
-          <div className="product">
-            <Link to="#"><img src={gill} alt="Gill77 - Player's Edition Season Cricket Bat" /></Link>
-            <div className="info">
-              <p className="name">Gill77 - Player's Edition Season Cricket Bat</p>
-              <p className="price">
-                <span className="original">Rs. 4,500.00</span>
-                <span className="discounted">Rs. 4,000.00</span>
-              </p>
-              <p className="savings">Save Rs. 500.00</p>
-            </div>
-            <div class="buttons">
-                   <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
-                </div>
-          </div>
-
-          <div className="product">
-            <Link to="#"><img src={msd} alt="Kwesports Bandook bat 4 Scoop 2 Hole Kashmir Willow Hard Tennis Bat" /></Link>
-            <div className="info">
-              <p className="name">Kwesports Bandook bat 4 Scoop 2 Hole Kashmir Willow Hard Tennis Bat</p>
-              <p className="price">
-                <span className="original">Rs. 5,100.00</span>
-                <span className="discounted">Rs. 4,500.00</span>
-              </p>
-              <p className="savings">Save Rs. 600.00</p>
-            </div>
-            <div class="buttons">
-                   <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
-                </div>
-          </div> */}
-
           {
-          products.map((val,i)=>{
-            return(
-              <Card product={val} key={i}/>
-            )
-          })
-        }
+            products
+              .filter((product) => product.category === 'SB')
+              .map((val, i) => (
+                <Card product={val} key={i} />
+              ))
+          }
         </div>
       </main>
 
@@ -127,7 +72,7 @@ function SeasonBat() {
           <a href="https://www.facebook.com"><img src={facebook} alt="Facebook" /></a>
           <a href="https://www.youtube.com"><img src={youtube} alt="YouTube" /></a>
         </div>
-        <p>&copy; 2024 Kwesports</p>
+        <p>&copy; 2024 GujaratSports</p>
       </footer>
     </div>
   );

@@ -12,8 +12,10 @@ SECRET_KEY = 'django-insecure-y9k&-p!lpwn-r5b4!%@6$5yg02_dw#dcon_rp(d_d!^e*n@3=p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    "*"
+]
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -27,6 +29,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'CricketBats',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -40,9 +44,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000', 
-]
+# CORS_ORIGIN_WHITELIST = '*'
+
 
 ROOT_URLCONF = 'sports.urls'
 
@@ -132,9 +135,34 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
+      
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+      
     ],
 }
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=72),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'AUTH_HEADER_TYPES':('Bearer',),
+    'ALGORITHM': 'HS256', 
+    # 'SIGNING_KEY': SECRET_KEY,  
+    # 'ROTATE_REFRESH_TOKENS': False,
+    # 'BLACKLIST_AFTER_ROTATION': True,
+    
+}
+
+
+CORS_ALLOW_HEADERS = [
+    'Authorization',
+]
+
+# CORS_ALLOW_ALL_ORIGINS = True
+

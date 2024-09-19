@@ -1,4 +1,4 @@
-import logo from "../images/logo.jpg"
+import logo from "../images/logo2.png"
 import search from "../images/search.jpg"
 import cart from "../images/cart.jpg"
 import facebook from "../images/facebook.jpg"

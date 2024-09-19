@@ -1,13 +1,15 @@
 import React from 'react';
+import { useState,useEffect } from 'react';
+import axios  from 'axios';
+import Card from './Card.jsx';
 import { Link } from 'react-router-dom';
 import "../Css/hard_tennis.css";
+import Authorize from './Authorize.jsx';
 import { logo, search, user, cart, facebook, insta, youtube } from './images.js';
-import img1 from "../images/AC/1.png";
-import img2 from "../images/AC/2.png";
-import img3 from "../images/AC/3.png";
-import img4 from "../images/AC/4.png";
+
 
 function Accessories() {
+  const {isAuthenticated } = Authorize();
   const [products, setProducts] = useState([])
   useEffect(()=>{
     axios.get("http://127.0.0.1:8000/product/").then((data)=>{
@@ -32,7 +34,11 @@ function Accessories() {
           </nav>
           <div className="nav-icons">
             <Link to="#"><img src={search} alt="Search" /></Link>
-            <Link to="/login"><img src={user} alt="User" /></Link>
+            {isAuthenticated ? (
+                            <Link to="/profile"><img src={user} alt="User" /></Link>
+                        ) : (
+                            <Link to="/login"><img src={user} alt="User" /></Link>
+                        )}
             <Link to="/cart"><img src={cart} alt="Cart" /></Link>
           </div>
         </div>
@@ -111,7 +117,7 @@ function Accessories() {
           <a href="https://www.facebook.com"><img src={facebook} alt="Facebook" /></a>
           <a href="https://www.youtube.com"><img src={youtube} alt="YouTube" /></a>
         </div>
-        <p>&copy; 2024 Kwesports</p>
+        <p>&copy; 2024 GujaratSports</p>
       </footer>
     </div>
   );

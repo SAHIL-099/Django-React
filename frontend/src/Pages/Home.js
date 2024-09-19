@@ -1,12 +1,14 @@
-import React,{useEffect} from 'react';
-import { Link } from 'react-router-dom';
+
+import {Link} from 'react-router-dom';
 import "../Css/styles.css";
-import axios from 'axios'
+import Authorize from './Authorize.jsx';
 import { logo, search, cart, facebook, insta, youtube, user, hard_tennis_bat, soft_tennis_bat, session_bat, grip } from './images.js';
 
 function Home() {
-
-
+    
+    const {isAuthenticated} = Authorize();
+    console.log(isAuthenticated)
+    
     return (
         <div>
             <header>
@@ -22,7 +24,11 @@ function Home() {
                     </nav>
                     <div className="nav-icons">
                         <Link to="#"><img src={search} alt="Search" /></Link>
-                        <Link to="/login"><img src={user} alt="User" /></Link>
+                        {isAuthenticated ? (
+                            <Link to="/profile"><img src={user} alt="User" /></Link>
+                        ) : (
+                            <Link to="/login"><img src={user} alt="User" /></Link>
+                        )}
                         <Link to="/cart"><img src={cart} alt="Cart" /></Link>
                     </div>
                 </div>
@@ -79,7 +85,7 @@ function Home() {
                     <Link to="https://www.facebook.com"><img src={facebook} alt="Facebook" /></Link>
                     <Link to="https://www.youtube.com"><img src={youtube} alt="YouTube" /></Link>
                 </div>
-                <p>&copy; 2024 Kwesports</p>
+                <p>&copy; 2024 GujaratSports</p>
             </footer>
         </div>
     );

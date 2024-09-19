@@ -15,13 +15,28 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
-from CricketBats.views import ProductView,UserView
+from django.urls import path
+from CricketBats.views import ProductView,UserProfileView,LoginView,UserDataView,CheckAuthView,LogoutView
+
 from django.conf.urls.static import static
 from django.conf import settings
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView
+)
+
+
 urlpatterns = [
     path('admin/',admin.site.urls),
+    path('check-auth/', CheckAuthView.as_view(),name='check-auth'),
     path('product/',ProductView.as_view(),name='product'),
-    path('user/',UserView.as_view(),name="user")
+    path('register/',UserProfileView.as_view(),name="register"),
+    path('login/',LoginView.as_view(),name="login"),
+    path('logout/',LogoutView.as_view(),name='logout'),
+    path('profile/', UserDataView.as_view(), name='user-profile'),
+    path('product/<int:id>/',ProductView.as_view(), name='product-detail'),
+    path('cart/<int:id>/',ProductView.as_view(), name='cart-item'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]+ static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

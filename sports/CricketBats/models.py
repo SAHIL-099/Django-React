@@ -1,15 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
 # register model
 
 
-class User(models.Model):
-    img=models.ImageField(upload_to='CricketBats/images/user')
+class UserProfile(models.Model):
+    img=models.ImageField(upload_to='CricketBats/images/user',blank=True, null=True)
     fullname= models.CharField(max_length=50, null=False)
     gender = models.CharField(max_length=1, choices=[('M', 'Male'),('F', 'Female'), ('O', 'Other')], null=True)
-    address = models.TextField(null=False)
     mobile=models.CharField(max_length=11,null=False,unique=True,default="")
     email = models.EmailField(max_length=200, unique=True, null=False)
     password = models.CharField(max_length=100,null=False)
+    address = models.TextField(null=False)
+    
     
 
 
@@ -40,12 +42,19 @@ class Accessories(models.Model):
         return self.name
      
     
-# class Cart(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)    
-#     item = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     quantity = models.IntegerField()
-#     total_price = models.IntegerField()
-#     def __str__(self):
-#         return self.user.fullname
-    
 
+    
+# class Cart(models.Model):
+#     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+#     created_at = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return f'Cart for {self.user.fullname}'
+
+# class CartItem(models.Model):
+#     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     quantity = models.PositiveIntegerField(default=1)
+
+#     def __str__(self):
+#         return f'{self.quantity} x {self.product.name} in {self.cart.user.username}\'s cart'

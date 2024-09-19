@@ -1,6 +1,4 @@
 
-
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -37,7 +35,7 @@ header {
 }
 
 .logo img {
-    height: 50px;
+    width: 120px;
 }
 
 nav ul {

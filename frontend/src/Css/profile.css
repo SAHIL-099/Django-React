@@ -37,7 +37,7 @@ header {
 }
 
 .logo img {
-    height: 50px;
+    width: 120px;
 }
 
 nav ul {
@@ -143,17 +143,29 @@ footer ul li a {
   
   .profile-actions {
     margin-top: 20px;
+    height: 50px;
   }
   
   .profile-actions button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
     cursor: pointer;
+   height: 40px;
+    width: 110px; 
   }
   
   .profile-actions button:hover {
     background-color: #0056b3;
   }
   
+  .logout{
+    /* border: 1px solid blue; */
+    height: 25px;
+    width: 70px;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-bottom: 0px;
+    /* background-color: #f194a0; */
+    color: #1057fc;
+  }

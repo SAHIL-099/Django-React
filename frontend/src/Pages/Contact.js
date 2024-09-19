@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Css/contact.css'; 
+import Authorize from './Authorize.jsx';
 import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
 
 function Contact() {
+  const {isAuthenticated } = Authorize();
   return (
     <div>
       <header>
@@ -21,7 +23,11 @@ function Contact() {
           </nav>
           <div className="nav-icons">
             <Link to="#"><img src={search} alt="Search" /></Link>
-            <Link to="/login"><img src={user} alt="User" /></Link>
+            {isAuthenticated ? (
+                            <Link to="/profile"><img src={user} alt="User" /></Link>
+                        ) : (
+                            <Link to="/login"><img src={user} alt="User" /></Link>
+                        )}
             <Link to="/cart"><img src={cart} alt="Cart" /></Link>
           </div>
         </div>
@@ -61,7 +67,7 @@ function Contact() {
           <a href="https://www.facebook.com"><img src={facebook} alt="Facebook" /></a>
           <a href="https://www.youtube.com"><img src={youtube} alt="YouTube" /></a>
         </div>
-        <p>&copy; 2024 Kwesports</p>
+        <p>&copy; 2024 GujaratSports</p>
       </footer>
     </div>
   );

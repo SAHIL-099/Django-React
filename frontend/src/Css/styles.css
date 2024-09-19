@@ -33,13 +33,12 @@ header {
     padding: 20px;
 }
 
-.logo img {
-    height: 50px;
+.logo img{
+    width: 120px;
 }
-
 nav ul {
     list-style: none;
-    padding: 0;
+    padding: 0; 
     margin: 0;
     display: flex;
     gap: 30px;
@@ -105,6 +104,8 @@ main {
     text-align: center;
     margin-left: 0px;
     margin-top: 5px;
+    background-color: #ffcc4d;
+    color: blue;
 }
 
 .contact-info,
@@ -124,6 +125,8 @@ main {
 .contact-info button{
     text-align: center;
     margin-left: 0px;
+    background-color: #ffcc4d;
+    color: blue;
 }
 footer {
     background-color: #333;

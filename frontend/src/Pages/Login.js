@@ -1,10 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
 import "../Css/login.css"; 
-
 import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
 
 function Login() {
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [error, setError] = useState('');
+  const navigate = useNavigate(); 
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(''); 
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/login/', formData); 
+      const {access,refresh } = response.data; 
+      console.log('access_token:',access)
+      console.log('refresh_token',refresh)
+
+      localStorage.setItem('access_token',access);
+      localStorage.setItem('refresh_token',refresh);
+
+      alert('Login successful!');
+      navigate('/'); 
+    } catch (error) {
+      console.error('Error logging in:', error.response?.data || error.message);
+      setError(error.response?.data?.detail || 'Invalid credentials. Please try again.');
+    }
+  };
+
   return (
     <div>
       <header>
@@ -22,7 +59,8 @@ function Login() {
           </nav>
           <div className="nav-icons">
             <Link to="#"><img src={search} alt="Search" /></Link>
-            <Link to="/login"><img src={user} alt="User" /></Link>
+             <Link to="/login"><img src={user} alt="User" /></Link>
+                        
             <Link to="/cart"><img src={cart} alt="Cart" /></Link>
           </div>
         </div>
@@ -33,13 +71,30 @@ function Login() {
 
       <main>
         <div className="login-form">
-          <form>
+          <form onSubmit={handleSubmit} method='POST'>
             <h2>Login</h2>
+            {error && <p className="error-message">{error}</p>}
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" />
-            <Link to="/forgate" className="forgot-password">Forgot password?</Link>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <Link to="/forgot" className="forgot-password">Forgot password?</Link>
             <button type="submit" className="sign-in">SIGN IN</button>
             <Link to="/register" className="create-account">Create account</Link>
           </form>
@@ -60,7 +115,7 @@ function Login() {
           <a href="https://www.facebook.com"><img src={facebook} alt="Facebook" /></a>
           <a href="https://www.youtube.com"><img src={youtube} alt="YouTube" /></a>
         </div>
-        <p>&copy; 2024 Kwesports</p>
+        <p>&copy; 2024 GujaratSports</p>
       </footer>
     </div>
   );
