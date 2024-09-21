@@ -17,24 +17,28 @@ function Authorize() {
             try {
                  const response=await axios.get('http://127.0.0.1:8000/check-auth/', {
                     headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-
+                        'Authorization':`Bearer ${token}`,
                     }
-                
+                    
                 });
                 setIsAuthenticated(response.status === 200);
-                // setIsAuthenticated(true)
+                console.log("User is authenticated");
             } catch (error) {
                
-                console.error("Authorization failed:", error.response?.data || error.message);
-                setIsAuthenticated(false);
+                if (error.response?.status === 401) {
+                    console.error("Token expired or invalid:", error.response.data);
+                    setIsAuthenticated(false);
+                    // Optionally handle token refresh here
+                } else {
+                    console.error("Authorization failed:", error.response?.data || error.message);
+                    setIsAuthenticated(false);
+                }
             }   
         };
         checkAuth();
     }, []);
 
-    return { isAuthenticated };
+    return {isAuthenticated };
 }
 
 export default Authorize;

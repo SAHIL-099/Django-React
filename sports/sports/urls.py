@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from CricketBats.views import ProductView,UserProfileView,LoginView,UserDataView,CheckAuthView,LogoutView
-
 from django.conf.urls.static import static
 from django.conf import settings
+from CricketBats.views import ProductView,CustomerView,LoginView,CustomerProfileView,CheckAuthView,LogoutView,CartView,CartItemRemoveView
+
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -29,14 +29,15 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/',admin.site.urls),
-    path('check-auth/', CheckAuthView.as_view(),name='check-auth'),
+    path('check-auth/',CheckAuthView.as_view(),name='check-auth'),
     path('product/',ProductView.as_view(),name='product'),
-    path('register/',UserProfileView.as_view(),name="register"),
+    path('register/',CustomerView.as_view(),name="register"),
     path('login/',LoginView.as_view(),name="login"),
     path('logout/',LogoutView.as_view(),name='logout'),
-    path('profile/', UserDataView.as_view(), name='user-profile'),
-    path('product/<int:id>/',ProductView.as_view(), name='product-detail'),
-    path('cart/<int:id>/',ProductView.as_view(), name='cart-item'),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('profile/',CustomerProfileView.as_view(),name='user-profile'),
+    path('product/<int:id>/',ProductView.as_view(),name='product-detail'),
+    path('cart/<int:customer_id>/', CartView.as_view(), name='cart-item'),
+    path('cart/remove-item/<int:cart_item_id>/', CartItemRemoveView.as_view(), name='cart-item-remove'),
+    path('token/', TokenObtainPairView.as_view(),name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(),name='token_refresh'),
 ]+ static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

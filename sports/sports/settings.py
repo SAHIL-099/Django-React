@@ -12,10 +12,30 @@ SECRET_KEY = 'django-insecure-y9k&-p!lpwn-r5b4!%@6$5yg02_dw#dcon_rp(d_d!^e*n@3=p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "*"
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000', 
 ]
-CORS_ORIGIN_ALLOW_ALL = True
+
+
+CORS_ALLOW_HEADERS = [
+    'Authorization',
+    'Content-Type',
+    'X-Requested-With',
+    'Accept',
+    'Origin',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
+
 
 # Application definition
 
@@ -30,7 +50,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'CricketBats',
     'rest_framework_simplejwt',
-    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -44,7 +63,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS_ORIGIN_WHITELIST = '*'
+# CORS_ORIGIN_WHITELIST = 
+
 
 
 ROOT_URLCONF = 'sports.urls'
@@ -138,9 +158,9 @@ REST_FRAMEWORK = {
       
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
+       'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.TokenAuthentication',
       
     ],
@@ -160,9 +180,5 @@ SIMPLE_JWT = {
 }
 
 
-CORS_ALLOW_HEADERS = [
-    'Authorization',
-]
 
-# CORS_ALLOW_ALL_ORIGINS = True
-
+CORS_ALLOW_CREDENTIALS = True

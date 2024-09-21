@@ -23,9 +23,9 @@ function Profile() {
           throw new Error('No access token found');
         }
 
-        const response = await axios.post('http://127.0.0.1:8000/profile/', {
+        const response = await axios.get('http://127.0.0.1:8000/profile/', {
           headers: {
-            'Authorization': `${accessToken}`,
+            'Authorization': `Bearer ${accessToken}`,
           },
         });
         setUser(response.data);

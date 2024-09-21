@@ -14,7 +14,7 @@ function Hardtennis() {
     axios.get("http://127.0.0.1:8000/product/").then((data) => {
       setProducts(data.data)
     })
-      .catch((e) => { console.log(e) })
+      .catch((e) => {console.log(e) })
   }, [])
 
   
@@ -49,7 +49,7 @@ function Hardtennis() {
       <div className="test">
       {
           products
-          .filter((product) => product.category === "HT")
+          .filter((product) => product.category ==="HT")
             .map((val,i) => (
               <Card product={val} key={i} />
             ))

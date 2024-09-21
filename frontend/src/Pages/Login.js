@@ -5,7 +5,7 @@ import "../Css/login.css";
 import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
 
 function Login() {
-
+  
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -33,6 +33,7 @@ function Login() {
 
       localStorage.setItem('access_token',access);
       localStorage.setItem('refresh_token',refresh);
+
 
       alert('Login successful!');
       navigate('/'); 

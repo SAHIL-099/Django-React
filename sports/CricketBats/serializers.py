@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import UserProfile,Product
+from .models import Customer,Product,Cart,CartItem
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UserProfile
+        model = Customer
         fields = '__all__'
         
         
@@ -13,16 +13,19 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
        
-# class CartItemSerializer(serializers.ModelSerializer):
-#     product = ProductSerializer()
+class CartItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)  # Nested product details
 
-#     class Meta:
-#         model = CartItem
-#         fields = ['product', 'quantity']
+    class Meta:
+        model = CartItem
+        fields = ['id', 'product', 'quantity']
 
-# class CartSerializer(serializers.ModelSerializer):
-#     items = CartItemSerializer(many=True, read_only=True)
+# Serializer for Cart
+class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True, read_only=True)  # Nested cart items
 
-#     class Meta:
-#         model = Cart
-#         fields = ['id', 'user', 'created_at', 'items']
+    class Meta:
+        model = Cart
+        fields = ['id', 'customer', 'created_at', 'items']
+        
+  

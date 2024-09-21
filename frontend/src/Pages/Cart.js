@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Link,useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios'; 
 import '../Css/cart.css'; 
 import Authorize from './Authorize.jsx';
 import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
+
 function Cart() {
-  const {isAuthenticated } = Authorize();
+  const { isAuthenticated } = Authorize();
+  const [cartItems, setCartItems] = useState([]); 
+  const { id } = useParams(); // Assuming `id` refers to the customer ID
 
-  const { id } = useParams(); // Correctly get the product ID from URL
-    const [product, setProduct] = useState(null);
-
-    useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/cart/${id}`) 
-            .then((response) => {
-                setProduct(response.data);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }, [id]); 
+  useEffect(() => {
+    // Use the correct API URL to get cart items for the authenticated user
+    axios.get(`http://127.0.0.1:8000/cart/${id}/`)  // Make sure `id` refers to the customer/user
+      .then((response) => {
+        setCartItems(response.data);
+      })
+      .catch((e) => {
+        console.error("Error fetching cart data:", e);
+      });
+  }, [id]);
 
   return (
     <div>
@@ -38,10 +39,10 @@ function Cart() {
           <div className="nav-icons">
             <Link to="#"><img src={search} alt="Search" /></Link>
             {isAuthenticated ? (
-                            <Link to="/profile"><img src={user} alt="User" /></Link>
-                        ) : (
-                            <Link to="/login"><img src={user} alt="User" /></Link>
-                        )}
+              <Link to="/profile"><img src={user} alt="User" /></Link>
+            ) : (
+              <Link to="/login"><img src={user} alt="User" /></Link>
+            )}
             <Link to="#"><img src={cart} alt="Cart" /></Link>
           </div>
         </div>
@@ -51,11 +52,7 @@ function Cart() {
       </header>
 
       <main>
-        {!product ? (
-          <div className="loading">
-            <p>Loading your cart...</p>
-          </div>
-        ) : product.length === 0 ? (
+        {cartItems.length === 0 ? (
           <div className="empty-cart">
             <h2>Your Cart is Empty</h2>
             <p>It looks like you haven't added any items to your cart yet. Start shopping to add items to your cart.</p>
@@ -65,16 +62,16 @@ function Cart() {
           <div className="cart-items">
             <h2>Your Cart</h2>
             <ul>
-              {product.map((item, index) => (
+              {cartItems.map((item, index) => (
                 <li key={index} className="cart-item">
-                  <img src={`http://127.0.0.1:8000${product.img}`} alt={item.name} />
+                  <img src={`http://127.0.0.1:8000${item.product.img}`} alt={item.product.name} />
                   <div className="item-details">
-                    <h3>{item.product_name}</h3>
-                    <p>{item.description}</p>
-                    <p>Size: {item.size}</p>
-                    <p>Weight: {item.weight}</p>
-                    {/* <p>Quantity: {product.quantity}</p>
-                    <p>Total Price: ${product.total_price}</p> */}
+                    <h3>{item.product.name}</h3>
+                    <p>{item.product.description}</p>
+                    <p>Size: {item.product.size}</p>
+                    <p>Weight: {item.product.weight}</p>
+                    <p>Quantity: {item.quantity}</p>
+                    <p>Total Price: Rs.{item.quantity * item.product.price}</p>
                   </div>
                 </li>
               ))}

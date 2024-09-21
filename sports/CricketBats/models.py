@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # register model
 
 
-class UserProfile(models.Model):
+class Customer(models.Model):
     img=models.ImageField(upload_to='CricketBats/images/user',blank=True, null=True)
     fullname= models.CharField(max_length=50, null=False)
     gender = models.CharField(max_length=1, choices=[('M', 'Male'),('F', 'Female'), ('O', 'Other')], null=True)
@@ -43,18 +43,17 @@ class Accessories(models.Model):
      
     
 
-    
-# class Cart(models.Model):
-#     user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-#     created_at = models.DateTimeField(auto_now_add=True)
+class Cart(models.Model):
+    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-#     def __str__(self):
-#         return f'Cart for {self.user.fullname}'
+    def __str__(self):
+        return f'Cart for {self.customer.fullname}'
 
-# class CartItem(models.Model):
-#     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     quantity = models.PositiveIntegerField(default=1)
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
 
-#     def __str__(self):
-#         return f'{self.quantity} x {self.product.name} in {self.cart.user.username}\'s cart'
+    def __str__(self):
+        return f'{self.quantity} x {self.product.name} in {self.cart.customer.fullname}\'s cart'
