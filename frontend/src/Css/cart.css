@@ -151,6 +151,8 @@ h1 {
 
 .item-details {
     flex: 1;
+  
+ 
 }
 
 .item-details h2 {
@@ -247,3 +249,49 @@ h1 {
         text-align: center;
     }
 }
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    padding: 1px;
+ 
+  }
+  
+  .quantity-controls button {
+    margin: 0px 5px;
+    padding: 1px 10px;
+    width: 50px;
+    height: 20px;
+    background-color: rgb(201, 201, 73);
+    color: black;
+  }
+
+  .item-details p{
+    color: #000;
+  }
+  .cart-actions{
+    padding: 4px;
+  }
+  .cart-actions .total{
+    margin-left: 50px;
+  }
+
+  .cart-actions .btn-checkout{
+    text-align: center;
+    margin-left: 60px;
+  }
+  .cart-actions .btn-continue-shopping
+  {
+    margin-top: 40px;
+    color: blue;
+    margin-left: 80px;
+  }
+
+  .item-details .rm{
+    color: red;
+    background-color: white;
+    margin-bottom: 0px;
+    padding: 5px 10px;
+    width: 1px;
+
+  }

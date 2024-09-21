@@ -3,6 +3,7 @@ import axios from "axios";
 
 function Authorize() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [userData, setUserData] = useState(null);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -22,7 +23,13 @@ function Authorize() {
                     
                 });
                 setIsAuthenticated(response.status === 200);
+                    // Fetch user data after authentication
+                    const userResponse = await axios.get('http://127.0.0.1:8000/profile/', {
+                        headers: { 'Authorization': `Bearer ${token}` },
+                    });
+                    setUserData(userResponse.data);
                 console.log("User is authenticated");
+                
             } catch (error) {
                
                 if (error.response?.status === 401) {
@@ -38,7 +45,7 @@ function Authorize() {
         checkAuth();
     }, []);
 
-    return {isAuthenticated };
+    return {isAuthenticated ,userData};
 }
 
 export default Authorize;

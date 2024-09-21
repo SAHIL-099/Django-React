@@ -33,7 +33,7 @@ function Main() {
                 <Route path='/contact' element={<Contact/>} />
                 <Route path='/login' element={<Login/>} />
                 <Route path='/register' element={<Register/>} />
-                <Route path='/cart/:id' element={<Cart/>} />
+                <Route path='/cart' element={<Cart/>} />
                 <Route path='/profile' element={<Profile/>} />
                 <Route path='/logout' element={<Logout/>} />
                 <Route path='/detail/:id' element={<Detail/>} />

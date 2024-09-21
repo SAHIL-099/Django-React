@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import Authorize from './Authorize'; // Adjust the import path
+import Authorize from './Authorize'; // Import Authorize
 
 const Card = ({ product }) => {
     const navigate = useNavigate();
-    const { isAuthenticated } = Authorize(); // Check authentication
+    const { userData } = Authorize(); // Get user data from Authorize
 
     const handleAddToCart = async () => {
         try {
@@ -13,17 +13,15 @@ const Card = ({ product }) => {
                 product_id: product.id,
                 quantity: 1,  // Default quantity
             };
-
-            if (!isAuthenticated) {
-                alert("Please log in to add items to your cart.");
+            if (!userData) {
+                alert("User ID is not defined.");
                 return;
             }
 
-            // Get the user ID from local storage or a global state if needed
-            const userId = localStorage.getItem('user_id'); // Assuming you store user ID
-
             // Make POST request to add the product to the user's cart
-            const response = await axios.post(`http://127.0.0.1:8000/cart/${userId}/`, payload);
+            const response = await axios.post(`http://127.0.0.1:8000/cart/${userData.id}/`, payload, {
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` },
+            });
 
             if (response.status === 200) {
                 alert("Item added to cart successfully!");

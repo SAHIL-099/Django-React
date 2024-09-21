@@ -114,6 +114,7 @@ class CustomerProfileView(APIView):
             profile = Customer.objects.get(id=user.id)
             # Assuming user ID matches Customer ID
             user_data = {
+                'id':profile.id,
                 'fullname': profile.fullname,
                 'email': profile.email,
                 'address': profile.address, 
@@ -175,11 +176,11 @@ class CartView(APIView):
 
 # API View to remove items from the cart
 class CartItemRemoveView(APIView):
-    def post(self, request, cart_item_id):
+    def delete(self, request, cart_item_id):
         try:
             cart_item = CartItem.objects.get(id=cart_item_id)
         except CartItem.DoesNotExist:
             return Response({"detail": "CartItem not found"}, status=status.HTTP_404_NOT_FOUND)
 
         cart_item.delete()
-        return Response({"detail": "Item removed from cart"}, status=status.HTTP_200_OK)
+        return Response({"detail": "Item removed from cart"}, status=status.HTTP_204_NO_CONTENT)
