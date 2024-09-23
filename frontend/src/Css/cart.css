@@ -160,10 +160,7 @@ h1 {
     font-size: 1.2em;
 }
 
-.item-details p {
-    color: #666;
-    margin: 5px 0;
-}
+
 
 .quantity {
     display: flex;
@@ -273,7 +270,7 @@ h1 {
     padding: 4px;
   }
   .cart-actions .total{
-    margin-left: 50px;
+   color: #000;
   }
 
   .cart-actions .btn-checkout{
@@ -294,4 +291,8 @@ h1 {
     padding: 5px 10px;
     width: 1px;
 
+  }
+
+  .cart-item .item-details  p{
+    color: #000;
   }

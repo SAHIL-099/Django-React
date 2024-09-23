@@ -1,0 +1,254 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    background-color: #f4f4f4;
+}
+
+.social-icons a {
+    margin-left: 15px;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo img {
+    width: 120px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+.nav-icons a {
+    margin-left: 15px;
+}
+
+.nav-icons img {
+    width: 24px;
+    height: 24px;
+}
+
+.customer-support {
+    background-color: #ffcc4d;
+    text-align: center;
+    /* padding: 10px 0; */
+    margin-bottom: 0px; /* Reduced gap */
+}
+
+.customer-support p {
+    margin: 0;
+    color: #0033cc;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+.contact-info,
+.newsletter {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+footer ul li {
+    margin: 5px 15px;
+}
+
+footer ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.social-media {
+    margin: 20px 0;
+}
+
+.social-media a {
+    margin: 0 10px;
+}
+
+.social-media img {
+    width: 24px;
+    height: 24px;
+}
+
+
+
+/* Main Order Detail Container */
+.order-item-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Order Title */
+  .order-item-detail h2 {
+    text-align: center;
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+  }
+  
+  /* General Styling for Headers */
+  .order-item-detail .oid, .order-item-detail .ost {
+    color: #007bff;
+    margin-bottom: 10px;
+    margin-left: 23px;
+    font-size: 20px;
+  }
+  
+  /* Order Items List */
+  .order-items-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  /* Individual Order Item */
+  .order-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .order-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Product Name Styling */
+  .order-item h3 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  /* Ensure that product details are displayed below the product name */
+  .product-details {
+    display: block;  /* Ensure block display to stack elements vertically */
+    line-height: 1.6;
+    margin-left: 20px;
+  }
+  
+  /* Individual detail lines for price, quantity, and total */
+  .product-details p {
+    color: #555;
+    font-size: 16px;
+    text-align: left;
+    display: block;
+                  /* Align text to the left to avoid centering */
+  }
+  
+  .product-details strong {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Total Amount Styling */
+  .order-total {
+    font-size: 22px;
+    color: #b21d1d;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 23px;
+  }
+  
+  /* Delivery Status Styling */
+  .delivery-status {
+    font-size: 18px;
+    color: #523b3b;
+    margin-top: 10px;
+    margin-left: 23px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .order-item-detail {
+      padding: 10px;
+    }
+  
+    .order-item-detail h2 {
+      font-size: 24px;
+    }
+  
+    .order-item {
+      padding: 10px;
+    }
+  
+    .order-item h3 {
+      font-size: 16px;
+    }
+  
+    .product-details p {
+      font-size: 14px;
+    }
+  
+    .order-total {
+      font-size: 20px;
+    }
+  
+    .delivery-status {
+      font-size: 16px;
+    }
+  }
+  

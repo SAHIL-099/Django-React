@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import Authorize from './Authorize.jsx';
 import "../Css/profile.css"; 
 import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
 
@@ -90,6 +89,9 @@ function Profile() {
           <div className="profile-actions">
             <Link to="/edit-profile">
               <button>Edit Profile</button>
+            </Link>
+            <Link to="/orderlist">
+              <button>View Order</button>
             </Link>
           </div>
           <Link to="/logout">

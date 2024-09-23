@@ -11,15 +11,13 @@ class Customer(models.Model):
     email = models.EmailField(max_length=200, unique=True, null=False)
     password = models.CharField(max_length=100,null=False)
     address = models.TextField(null=False)
-    
-    
 
 
     def __str__(self):
         return self.fullname
        
 class Product(models.Model):
-    category=models.CharField(max_length=3,choices=[('ST','SoftTennis'),('HT','HardTennis'),('SB','SeasonBat')],null=False,default="")
+    category=models.CharField(max_length=3,choices=[('ST','SoftTennis'),('HT','HardTennis'),('SB','SeasonBat'),('AC','Accessories')],null=False,default="")
     img = models.ImageField(upload_to='CricketBats/images/product')
     name = models.CharField(max_length=100)
     description = models.TextField(null=True) 
@@ -31,16 +29,6 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
-    
-class Accessories(models.Model):
-    img = models.ImageField(upload_to='CricketBats/images/product')
-    name = models.CharField(max_length=100)
-    price = models.IntegerField()
-    description = models.TextField()
-    
-    def __str__(self):
-        return self.name
-     
     
 
 class Cart(models.Model):
@@ -57,3 +45,41 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f'{self.quantity} x {self.product.name} in {self.cart.customer.fullname}\'s cart'
+    
+    
+    
+class Order(models.Model):
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Delivered', 'Delivered')
+    ]
+
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    order_date = models.DateTimeField(auto_now_add=True)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    shipping_address = models.TextField(null=False)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+
+    def __str__(self):
+        return f'Order #{self.id} by {self.customer.fullname}'
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f'{self.quantity} x {self.product.name} in Order {self.order.id}'
+    
+    
+    
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    mobile_no = models.CharField(max_length=15)
+    email = models.EmailField()
+    query = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Query from {self.name}'

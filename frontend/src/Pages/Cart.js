@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
 import '../Css/cart.css'; 
 import Authorize from './Authorize.jsx';
 import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
 
 function Cart() {
-  const { isAuthenticated, userData } = Authorize(); // Get user data and authentication status
+  const { isAuthenticated, userData } = Authorize(); 
   const [cartItems, setCartItems] = useState([]); 
   const [totalAmount, setTotalAmount] = useState(0);
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
   useEffect(() => {
     const fetchCartItems = async () => {
-      if (!isAuthenticated || !userData) return; // Exit if not authenticated or user data is unavailable
+      if (!isAuthenticated || !userData) return; 
 
       try {
         const response = await axios.get(`http://127.0.0.1:8000/cart/${userData.id}/`, {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}`, // Use access token for authentication
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
           },
         });
 
         if (response.data && Array.isArray(response.data.items)) {
           setCartItems(response.data.items);
-        } else {
-          console.error("Expected items array but got:", response.data);
         }
       } catch (error) {
         console.error("Error fetching cart data:", error);
@@ -35,7 +34,7 @@ function Cart() {
   }, [isAuthenticated, userData]);
 
   useEffect(() => {
-    const total = cartItems.reduce((acc, item) => acc + item.quantity * item.product.price, 0);
+    const total = cartItems.reduce((currval, item) => currval + item.quantity * item.product.price, 0);
     setTotalAmount(total);
   }, [cartItems]);
 
@@ -54,7 +53,7 @@ function Cart() {
     );
     setCartItems(updatedItems);
   };
-
+  
   const removeItem = async (cartItemId) => {
     try {
       await axios.delete(`http://127.0.0.1:8000/cart/remove-item/${cartItemId}/`, {
@@ -62,12 +61,14 @@ function Cart() {
           'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
         },
       });
-
-      // Update the cartItems state to remove the item
       setCartItems(cartItems.filter(item => item.id !== cartItemId));
     } catch (error) {
       console.error("Error removing item:", error);
     }
+  };
+
+  const handleOrder = () => {
+    navigate('/order', { state: { cartItems, totalAmount } });
   };
 
   return (
@@ -116,23 +117,21 @@ function Cart() {
                   <img src={`http://127.0.0.1:8000${item.product.img}`} alt={item.product.name} />
                   <div className="item-details">
                     <h3>{item.product.name}</h3>
-                    <p>{item.product.description}</p>
-                    <p>Size: {item.product.size}</p>
-                    <p>Weight: {item.product.weight}</p>
+                    <p className='p'>Price Rs.{item.product.price}</p>
                     <div className="quantity-controls">
-                     quantity: <button onClick={() => decreaseQuantity(item)}>-</button>
+                      Quantity: <button onClick={() => decreaseQuantity(item)}>-</button>
                       <span>{item.quantity}</span>
                       <button onClick={() => increaseQuantity(item)}>+</button>
                     </div>
                     <p>Total Price: Rs.{item.quantity * item.product.price}</p>
-                    <button className ="rm" onClick={()=>removeItem(item.id)}>Remove</button>
+                    <button className="rm" onClick={() => removeItem(item.id)}>Remove</button>
                   </div>
                 </li>
               ))}
             </ul>
             <div className="cart-actions">
               <h3 className='total'>Total Amount: Rs.{totalAmount}</h3>
-              <button className="btn-checkout">Order</button>
+              <button className="btn-checkout" onClick={handleOrder}>Order</button>
               <br />
               <Link to="/" className="btn-continue-shopping">Continue Shopping</Link>
             </div>

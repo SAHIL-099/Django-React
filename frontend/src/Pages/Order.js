@@ -1,11 +1,54 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import "../Css/privacy.css"; 
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import '../Css/order.css'; 
+import axios from 'axios';
 import Authorize from './Authorize.jsx';
 import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
 
 function Order() {
-  const {isAuthenticated } = Authorize();
+  const {isAuthenticated} = Authorize();
+  const location = useLocation();
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const { cartItems, totalAmount } = location.state || { cartItems: [], totalAmount: 0 };
+
+  async function handleOrder() {
+    const orderData = {
+      items: cartItems.map(item => ({
+        product: item.product.id,
+        name:item.product.name,
+        quantity: item.quantity,
+        price: item.product.price,
+      })),
+      total_amount: totalAmount,
+
+      // Add other necessary fields like customer info, shipping address, etc.
+    };
+
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/orders/create/', orderData, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+        },
+    });
+    if (response.status === 201) {
+      // Clear the cart after placing the order
+      await axios.delete('http://127.0.0.1:8000/cart/clear/', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
+
+      navigate(`/orders/${response.data.id}`);
+    } else {
+        alert('Failed to place order');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    }
+  }
+
   return (
     <div>
       <header>
@@ -37,10 +80,33 @@ function Order() {
       </header>
 
       <main>
-        <div className="test">
-         <h2>Order is is Deleverd to your address:</h2>
-
-          </div>
+        <div className="order-summary">
+          <h2>Order Summary</h2>
+          {cartItems.length === 0 ? (
+            <p>No items in the order.</p>
+          ) : (
+            <div className="order-details">
+              <ul>
+                {cartItems.map((item, index) => (
+                  <li key={index} className="order-item">
+                    <img src={`http://127.0.0.1:8000${item.product.img}`} alt={item.product.name} />
+                    <div className="item-details">
+                      <h3>{item.product.name}</h3>
+                      <p>Price: Rs.{item.product.price}</p>
+                      <p>Quantity: {item.quantity}</p>
+                      <p>Total: Rs.{item.quantity * item.product.price}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <h3 className='total'>Total Amount: Rs.{totalAmount}</h3>
+              <div className="order-actions">
+                <button onClick={handleOrder}>Place Order</button>
+              </div>
+            </div>
+          )}
+          <Link to="/" className="btn-continue-shopping">Continue Shopping</Link>
+        </div>
       </main>
 
       <footer>

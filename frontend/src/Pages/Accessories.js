@@ -48,58 +48,16 @@ function Accessories() {
       </header>
 
       <main>
-        <div className="test">
-          {/* <div className="product">
-            <Link to="#"><img src={img1} alt="BANDOOK TRACTION CRICKET BAT GRIP 1 PIECE" /></Link>
-            <div className="info">
-              <p className="name">BANDOOK TRACTION CRICKET BAT GRIP 1 PIECE</p>
-              <p className="savings">Rs. 99.00</p>
-            </div>
-            <div class="buttons">
-                   <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
-                </div>
-          </div>
+      <div className="test">
+      {
+          products
+          .filter((product) => product.category ==="AC")
+            .map((val,i) => (
+              <Card product={val} key={i} />
+            ))
 
-          <div className="product">
-            <Link to="#"><img src={img2} alt="BANDOOK TRACTION CRICKET BAT GRIP 1 Piece" /></Link>
-            <div className="info">
-              <p className="name">BANDOOK TRACTION CRICKET BAT GRIP 1 Piece</p>
-              <p className="savings">Rs. 99.00</p>
-            </div>
-            <div class="buttons">
-                   <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
-                </div>
-          </div>
-
-          <div className="product">
-            <Link to="#"><img src={img3} alt="BANDOOK TRACTION CRICKET BAT GRIP - (RED-BLACK COLOR PACK OF 12)" /></Link>
-            <div className="info">
-              <p className="name">BANDOOK TRACTION CRICKET BAT GRIP - (RED-BLACK COLOR PACK OF 12)</p>
-              <p className="savings">Save Rs. 899.00</p>
-            </div>
-            <div class="buttons">
-                   <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
-                </div>
-          </div>
-
-          <div className="product">
-            <Link to="#"><img src={img4} alt="Chevron Cricket Bat Grip white - (pack of 10)" /></Link>
-            <div className="info">
-              <p className="name">Chevron Cricket Bat Grip white - (pack of 10)</p>
-              <p className="savings">Rs. 999.00</p>
-            </div>
-            <div class="buttons">
-                   <Link to="/cart"> <button class="add-to-cart">ADD TO CART</button></Link>
-                </div>
-          </div> */}
-
-          {
-          products.map((val,i)=>{
-            return(
-              <Card product={val} key={i}/>
-            )
-          })
         }
+        
         </div>
       </main>
 
