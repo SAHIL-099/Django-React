@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import "../Css/return_refund.css"; 
 import Authorize from './Authorize.jsx';
 
-import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
+import { logo, cart, facebook, insta, youtube, user } from './images.js';
 
 function ReturnRefund() {
   const {isAuthenticated } = Authorize();
@@ -19,11 +19,11 @@ function ReturnRefund() {
           <nav>
             <ul>
               <li><Link to="/">CRICKET BATS</Link></li>
-              <li><Link to="/">ACCESSORIES</Link></li>
+              <li><Link to="/accessories">ACCESSORIES</Link></li>
             </ul>
           </nav>
           <div className="nav-icons">
-            <Link to="#"><img src={search} alt="Search" /></Link>
+    
             {isAuthenticated ? (
                             <Link to="/profile"><img src={user} alt="User" /></Link>
                         ) : (
@@ -33,7 +33,7 @@ function ReturnRefund() {
           </div>
         </div>
         <div className="customer-support">
-          <p>CUSTOMER SUPPORT - 1234567890 - 2244668899</p>
+        <p>Gujarat Sports</p>
         </div>
       </header>
 
@@ -42,7 +42,7 @@ function ReturnRefund() {
           <h1>Return & Refund Policy</h1>
           <ol type="1">
             <li>Araldite application is a prerequisite for warranty claim on the bat.</li>
-            <li>Damaged bats must be returned to KWE Sports office for warranty claim; failure to do so forfeits the claim.</li>
+            <li>Damaged bats must be returned to Gujarat Sports office for warranty claim; failure to do so forfeits the claim.</li>
             <li>Customer bears shipping charges for returning damaged bat.</li>
             <li>Video and photo evidence of non-physical damage required for warranty claim.</li>
             <li>Confirmation from the damage and return team is necessary before sending back the bat; failure to confirm may result in forfeiture unless shipping charges are paid.</li>
@@ -58,7 +58,6 @@ function ReturnRefund() {
 
       <footer>
         <ul>
-          <li><Link to="#">Track Order</Link></li>
           <li><Link to="/about">About Us</Link></li>
           <li><Link to="/privacy">Privacy Policy</Link></li>
           <li><Link to="/return-refund">Return & Refund Policy</Link></li>

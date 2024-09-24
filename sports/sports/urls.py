@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from CricketBats.views import ProductView,CustomerView,LoginView,CustomerProfileView,CheckAuthView,LogoutView,CartView,CartItemRemoveView,OrderDetailView,OrderListView,OrderView,ClearCartView,ContactView
+from CricketBats.views import ProductView,CustomerView,LoginView,CustomerProfileView,CheckAuthView,CartView,CartItemRemoveView,OrderDetailView,OrderListView,OrderView,ClearCartView,ContactView
 
 
 from rest_framework_simplejwt.views import (
@@ -34,16 +34,16 @@ urlpatterns = [
     path('contact/', ContactView.as_view(), name='contact'),
     path('register/',CustomerView.as_view(),name="register"),
     path('login/',LoginView.as_view(),name="login"),
-    path('logout/',LogoutView.as_view(),name='logout'),
     path('profile/',CustomerProfileView.as_view(),name='user-profile'),
     path('product/<int:id>/',ProductView.as_view(),name='product-detail'),
     path('cart/<int:customer_id>/', CartView.as_view(), name='cart-item'),
     path('cart/clear/',ClearCartView.as_view(), name='clear-cart'),
     path('cart/remove-item/<int:cart_item_id>/', CartItemRemoveView.as_view(), name='cart-item-remove'),
-    path('orders/', OrderListView.as_view(), name='order-list'),  # List all orders
-    path('orders/create/',OrderView.as_view(), name='order-create'),  # Create a new order
+    path('orders/', OrderListView.as_view(), name='order-list'),  
+    path('orders/create/',OrderView.as_view(), name='order-create'),  
     path('orders/<int:order_id>/', OrderDetailView.as_view(), name='order-detail'),  # Get specific order
     path('token/', TokenObtainPairView.as_view(),name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(),name='token_refresh'),
     
 ]+ static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

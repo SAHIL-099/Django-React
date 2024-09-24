@@ -1,17 +1,17 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
-import Authorize from './Authorize'; // Import Authorize
+import Authorize from './Authorize'; 
 
 const Card = ({ product }) => {
     const navigate = useNavigate();
-    const { userData } = Authorize(); // Get user data from Authorize
+    const { userData } = Authorize(); 
 
     const handleAddToCart = async () => {
         try {
             const payload = {
                 product_id: product.id,
-                quantity: 1,  // Default quantity
+                quantity: 1, 
             };
             if (!userData) {
                 alert("User ID is not defined.");

@@ -5,8 +5,7 @@ import Card from './Card.jsx';
 import { Link } from 'react-router-dom';
 import "../Css/hard_tennis.css";
 import Authorize from './Authorize.jsx';
-import { logo, search, cart, facebook, insta, youtube ,user} from './images.js';
-
+import { logo, cart, facebook, insta, youtube ,user} from './images.js';
 
 function SoftTennis() {
  
@@ -16,11 +15,11 @@ function SoftTennis() {
     axios
       .get("http://127.0.0.1:8000/product/")
       .then((response) => {
-        console.log(response.data); // Log the data to see if it's being fetched correctly
+        console.log(response.data); 
         setProducts(response.data);
       })
       .catch((e) => {
-        console.log(e); // Log any errors
+        console.log(e); 
       });
   }, []);
   
@@ -36,11 +35,10 @@ function SoftTennis() {
           <nav>
             <ul>
               <li><Link to="/">CRICKET BATS</Link></li>
-              <li><Link to="/">ACCESSORIES</Link></li>
+              <li><Link to="/accessories">ACCESSORIES</Link></li>
             </ul>
           </nav>
           <div className="nav-icons">
-            <Link to="#"><img src={search} alt="Search" /></Link>
             {isAuthenticated ? (
                             <Link to="/profile"><img src={user} alt="User" /></Link>
                         ) : (
@@ -50,7 +48,7 @@ function SoftTennis() {
           </div>
         </div>
         <div className="customer-support">
-          <p>CUSTOMER SUPPORT - 1234567890 - 2244668899</p>
+          <p>Gujarat Sports</p>
         </div>
       </header>
 
@@ -66,7 +64,6 @@ function SoftTennis() {
 
       <footer>
         <ul>
-          <li><Link to="#">Track Order</Link></li>
           <li><Link to="/about">About Us</Link></li>
           <li><Link to="/privacy">Privacy Policy</Link></li>
           <li><Link to="/return-refund">Return & Refund Policy</Link></li>

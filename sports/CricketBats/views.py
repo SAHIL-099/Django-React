@@ -1,17 +1,13 @@
 
 # Create your views here.
-
 # from rest_framework.decorators import APIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.contrib.auth.hashers import check_password
-from django.core.mail import send_mail
 from .models import Customer, Product, Cart, CartItem, Order, OrderItem
 from .serializers import CustomerSerializer, ProductSerializer, CartSerializer, OrderSerializer, ContactSerializer
-
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import get_object_or_404
-from rest_framework import status, permissions
+from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -155,19 +151,6 @@ class CustomerProfileView(APIView):
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class LogoutView(APIView):
-    def post(self, request):
-        # try:
-        #     refresh_token = request.data.get('refresh')
-        #     if refresh_token:
-        #         token = RefreshToken(refresh_token)
-        #         token.blacklist()
-        #     return Response({'message': 'Successfully logged out.'}, status=status.HTTP_200_OK)
-        # except TokenError as e:
-        #     return Response({'detail': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        return ("logout")
-
-
 class CartView(APIView):
     def get(self, request, customer_id):
         customer_id = request.user
@@ -234,10 +217,10 @@ class OrderView(APIView):
     def post(self, request):
         # Get the custom user instance
       
-        customer = Customer.objects.get(id=request.user.id)  # Adjust based on how you relate the user and customer
+        customer = Customer.objects.get(id=request.user.id)  
 
         # Use the user's address from the profile as the shipping address
-        shipping_address = customer.address  # Adjust this if your address field is named differently
+        shipping_address = customer.address  
         
         # Calculate the total amount from the items
         items = request.data.get('items', [])
@@ -254,14 +237,14 @@ class OrderView(APIView):
         for item in items:
             product_id = item.get('product')  
             quantity = item.get('quantity')
-            price = item.get('price')  # Ensure you're using the correct field 
+            price = item.get('price')   
 
             # Create order items with the necessary details
             OrderItem.objects.create(
                 order=order,
                 product_id=product_id,
                 quantity=quantity,
-                price=price  # Store the total price if needed
+                price=price  
             )
 
         serializer = OrderSerializer(order)
@@ -275,7 +258,7 @@ class OrderListView(APIView):
     def get(self, request):
         # Get orders for the authenticated customer using user ID
         customer_id = request.user.id
-        orders = Order.objects.filter(customer_id=customer_id)
+        orders = Order.objects.filter(customer_id=customer_id).order_by('-order_date')
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -291,6 +274,7 @@ class OrderDetailView(APIView):
             order_data = {
                 "id": order.id,
                 "status":order.status,
+                "shipping_address": order.shipping_address,
                 "total_amount": order.total_amount,
                 "items": [
                     {

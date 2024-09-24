@@ -3,13 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
 import '../Css/cart.css'; 
 import Authorize from './Authorize.jsx';
-import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
+import { logo, cart, facebook, insta, youtube, user } from './images.js';
 
 function Cart() {
   const { isAuthenticated, userData } = Authorize(); 
   const [cartItems, setCartItems] = useState([]); 
   const [totalAmount, setTotalAmount] = useState(0);
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -83,11 +83,11 @@ function Cart() {
           <nav>
             <ul>
               <li><Link to="/">CRICKET BATS</Link></li>
-              <li><Link to="/">ACCESSORIES</Link></li>
+              <li><Link to="/accessories">ACCESSORIES</Link></li>
             </ul>
           </nav>
           <div className="nav-icons">
-            <Link to="#"><img src={search} alt="Search" /></Link>
+          
             {isAuthenticated ? (
               <Link to="/profile"><img src={user} alt="User" /></Link>
             ) : (
@@ -97,7 +97,7 @@ function Cart() {
           </div>
         </div>
         <div className="customer-support">
-          <p>CUSTOMER SUPPORT - 1234567890 - 2244668899</p>
+        <p>Gujarat Sports</p>
         </div>
       </header>
 
@@ -141,7 +141,7 @@ function Cart() {
 
       <footer>
         <ul>
-          <li><Link to="#">Track Order</Link></li>
+       
           <li><Link to="/about">About Us</Link></li>
           <li><Link to="/privacy">Privacy Policy</Link></li>
           <li><Link to="/return-refund">Return & Refund Policy</Link></li>

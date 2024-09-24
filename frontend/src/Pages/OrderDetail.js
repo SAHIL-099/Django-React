@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams,Link } from 'react-router-dom';
 import axios from 'axios';
 import Authorize from './Authorize';
-import '../Css/order_detail.css'; // Create a CSS file for styles if needed
-import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
+import '../Css/order_detail.css';
+import { logo, cart, facebook, insta, youtube, user } from './images.js';
 function OrderDetail() {
  const{isAuthenticated}=Authorize()
   const {orderId } = useParams();
@@ -14,14 +14,15 @@ function OrderDetail() {
     async function fetchOrder() {
         console.log("order id :",orderId)
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/orders/${orderId}/`, { // Update with your endpoint
+        const response = await axios.get(`http://127.0.0.1:8000/orders/${orderId}/`, { 
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}`, // Adjust for your auth method
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`, 
           },
         });
 
         if (response.status === 200) {
         console.log('Fetched order data:', response.data); 
+
           setOrder(response.data);
         } else {
           alert('Failed to fetch order details');
@@ -52,11 +53,11 @@ function OrderDetail() {
         <nav>
           <ul>
             <li><Link to="/">CRICKET BATS</Link></li>
-            <li><Link to="/">ACCESSORIES</Link></li>
+            <li><Link to="/accessories">ACCESSORIES</Link></li>
           </ul>
         </nav>
         <div className="nav-icons">
-          <Link to="#"><img src={search} alt="Search" /></Link>
+          {/* <Link to="#"><img src={search} alt="Search" /></Link> */}
           {isAuthenticated ? (
                           <Link to="/profile"><img src={user} alt="User" /></Link>
                       ) : (
@@ -66,7 +67,7 @@ function OrderDetail() {
         </div>
       </div>
       <div className="customer-support">
-        <p>CUSTOMER SUPPORT - 1234567890 - 2244668899</p>
+      <p>Gujarat Sports</p>
       </div>
     </header>
 
@@ -94,7 +95,7 @@ function OrderDetail() {
 
     <footer>
       <ul>
-        <li><Link to="#">Track Order</Link></li>
+  
         <li><Link to="/about">About Us</Link></li>
         <li><Link to="/privacy">Privacy Policy</Link></li>
         <li><Link to="/return-refund">Return & Refund Policy</Link></li>

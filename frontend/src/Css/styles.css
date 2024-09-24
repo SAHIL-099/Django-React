@@ -48,6 +48,11 @@ nav ul li a {
     text-decoration: none;
     color: #000;
     font-weight: bold;
+    transition: color 0.3s ease, background-color 0.3s ease
+}
+nav ul li a:hover {
+    color: #690738; 
+    background-color: rgba(255, 204, 77, 0.2); 
 }
 
 .nav-icons a {
@@ -123,7 +128,7 @@ main {
 }
 
 .contact-info button{
-    text-align: center;
+    text-align: center; 
     margin-left: 0px;
     background-color: #ffcc4d;
     color: blue;

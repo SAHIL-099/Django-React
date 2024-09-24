@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../Css/hard_tennis.css";
 import Authorize from './Authorize.jsx';
-import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
+import { logo, cart, facebook, insta, youtube, user } from './images.js';
 import axios from 'axios';
 import { useEffect } from 'react';
 import Card from './Card.jsx'
@@ -30,11 +30,11 @@ function Hardtennis() {
           <nav>
             <ul>
               <li><Link to="/">CRICKET BATS</Link></li>
-              <li><Link to="/">ACCESSORIES</Link></li>
+              <li><Link to="/accessories">ACCESSORIES</Link></li>
             </ul>
           </nav>
           <div className="nav-icons">
-            <Link to="#"><img src={search} alt="Search" /></Link>
+    
             {isAuthenticated ? (
                             <Link to="/profile"><img src={user} alt="User" /></Link>
                         ) : (
@@ -43,8 +43,10 @@ function Hardtennis() {
             <Link to="/cart"><img src={cart} alt="Cart" /></Link>
           </div>
         </div>
+        <div className="customer-support">
+          <p>Gujarat Sports</p>
+        </div>
       </header>
-
       <main>
       <div className="test">
       {
@@ -55,14 +57,13 @@ function Hardtennis() {
             ))
 
         }
-        
         </div>
 
       </main>
 
       <footer>
         <ul>
-          <li><Link to="#">Track Order</Link></li>
+         
           <li><Link to="/about">About Us</Link></li>
           <li><Link to="/privacy">Privacy Policy</Link></li>
           <li><Link to="/return-refund">Return & Refund Policy</Link></li>

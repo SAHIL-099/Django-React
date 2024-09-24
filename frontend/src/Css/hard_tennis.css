@@ -11,7 +11,7 @@ header {
     border-bottom: 1px solid #eaeaea;
 }
 
-.top-nav {
+.top-nav {  
     display: flex;
     justify-content: flex-end;
     padding: 10px;
@@ -61,15 +61,15 @@ nav ul li a {
     height: 24px;
 }
 
-.customer-support {
-    background-color: #ffcc4d;
+header .customer-support {
+    background-color: #b2d7d2;
     text-align: center;
     padding: 10px 0;
 }
 
-.customer-support p {
+ header .customer-support p {
     margin: 0;
-    color: #0033cc;
+    color: #c26b08;
     font-weight: bold;
 }
 
@@ -125,15 +125,15 @@ footer ul li a {
 }
 
 
-.test {
+main .test {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 20px;
+    margin-top: 0;
 }
 .product {
     border: 1px solid #ddd;
-    margin: 10px;
+    margin: 0 auto;
     padding: 20px;
     text-align: center;
     width: 200px;

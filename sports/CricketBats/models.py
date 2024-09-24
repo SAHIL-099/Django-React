@@ -61,7 +61,7 @@ class Order(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
 
     def __str__(self):
-        return f'Order #{self.id} by {self.customer.fullname}'
+        return f'Order {self.id} by {self.customer.fullname}'
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')

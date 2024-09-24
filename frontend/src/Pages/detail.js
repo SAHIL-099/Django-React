@@ -1,17 +1,47 @@
 import React from 'react';
 import "../Css/detail.css";
 import Authorize from './Authorize.jsx';
-import { Link, useParams } from 'react-router-dom';
-import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
+import { Link, useParams,useNavigate } from 'react-router-dom';
+import { logo, cart, facebook, insta, youtube, user } from './images.js';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 
 
 function Detail() {
-    const { isAuthenticated } = Authorize();
+    const { isAuthenticated,userData} = Authorize();
+    const navigate = useNavigate();
     const { id } = useParams(); // Correctly get the product ID from URL
     const [product, setProduct] = useState(null);
+
+    const handleAddToCart = async () => {
+        try {
+            const payload = {
+                product_id: product.id,
+                quantity: 1, 
+            };
+            if (!userData) {
+                alert("User ID is not defined.");
+                return;
+            }
+
+            // Make POST request to add the product to the user's cart
+            const response = await axios.post(`http://127.0.0.1:8000/cart/${userData.id}/`, payload, {
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` },
+            });
+
+            if (response.status === 200) {
+                alert("Item added to cart successfully!");
+                navigate('/cart');
+            } else {
+                alert("Failed to add item to cart.");
+            }
+        } catch (error) {
+            console.error("Error adding to cart:", error);
+            alert("Error adding item to cart.");
+        }
+    };
+
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/product/${id}`)
@@ -26,6 +56,10 @@ function Detail() {
     if (!product) {
         return <div>Loading...</div>;
     }
+
+
+
+
     return (
         <div>
             <header>
@@ -38,11 +72,11 @@ function Detail() {
                     <nav>
                         <ul>
                             <li><Link to="/">CRICKET BATS</Link></li>
-                            <li><Link to="/">ACCESSORIES</Link></li>
+                            <li><Link to="/accessories">ACCESSORIES</Link></li>
                         </ul>
                     </nav>
                     <div className="nav-icons">
-                        <Link to="#"><img src={search} alt="Search" /></Link>
+                      
                         {isAuthenticated ? (
                             <Link to="/profile"><img src={user} alt="User" /></Link>
                         ) : (
@@ -52,14 +86,14 @@ function Detail() {
                     </div>
                 </div>
                 <div className="customer-support">
-                    <p>CUSTOMER SUPPORT - 1234567890 - 2244668899</p>
+                <p>Gujarat Sports</p>
                 </div>
             </header>
             <main>
                 <div className="product-container">
                     <img src={`http://127.0.0.1:8000${product.img}`} alt="batname" />
                     <div className="info">
-                        <a href="#"><p className="name">{product.name}</p></a>
+                        <p className="name">{product.name}</p>
                         <br />
                         <p className="price">
                             <span className="original">Price Rs.{product.price}</span>
@@ -80,16 +114,14 @@ function Detail() {
                                 </ul>
                             )}
                         </div>
-                        <Link to={`/cart/${product.id}`}><button className='addtocart'>Add to cart</button> </Link>
-                        <br />
-                        <Link to={`/buy/${product.id}`}><button className='buynow'> Buy Now</button></Link>
+                      <button className='addtocart' onClick={handleAddToCart}>Add to cart</button>
+                        
                     </div>
 
                 </div>
             </main>
             <footer>
                 <ul>
-                    <li><Link to="#">Track Order</Link></li>
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to="/privacy">Privacy Policy</Link></li>
                     <li><Link to="/return-refund">Return & Refund Policy</Link></li>

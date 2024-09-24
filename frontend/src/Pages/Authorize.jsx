@@ -35,7 +35,7 @@ function Authorize() {
                 if (error.response?.status === 401) {
                     console.error("Token expired or invalid:", error.response.data);
                     setIsAuthenticated(false);
-                    // Optionally handle token refresh here
+               
                 } else {
                     console.error("Authorization failed:", error.response?.data || error.message);
                     setIsAuthenticated(false);

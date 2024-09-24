@@ -3,12 +3,12 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../Css/order.css'; 
 import axios from 'axios';
 import Authorize from './Authorize.jsx';
-import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
+import { logo,  cart, facebook, insta, youtube, user } from './images.js';
 
 function Order() {
   const {isAuthenticated} = Authorize();
   const location = useLocation();
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const navigate = useNavigate(); 
   const { cartItems, totalAmount } = location.state || { cartItems: [], totalAmount: 0 };
 
   async function handleOrder() {
@@ -21,7 +21,7 @@ function Order() {
       })),
       total_amount: totalAmount,
 
-      // Add other necessary fields like customer info, shipping address, etc.
+      
     };
 
     try {
@@ -61,11 +61,11 @@ function Order() {
           <nav>
             <ul>
               <li><Link to="/">CRICKET BATS</Link></li>
-              <li><Link to="/">ACCESSORIES</Link></li>
+              <li><Link to="/accessories">ACCESSORIES</Link></li>
             </ul>
           </nav>
           <div className="nav-icons">
-            <Link to="#"><img src={search} alt="Search" /></Link>
+            {/* <Link to="#"><img src={search} alt="Search" /></Link> */}
             {isAuthenticated ? (
                             <Link to="/profile"><img src={user} alt="User" /></Link>
                         ) : (
@@ -75,7 +75,7 @@ function Order() {
           </div>
         </div>
         <div className="customer-support">
-          <p>CUSTOMER SUPPORT - 1234567890 - 2244668899</p>
+        <p>Gujarat Sports</p>
         </div>
       </header>
 
@@ -111,7 +111,7 @@ function Order() {
 
       <footer>
         <ul>
-          <li><Link to="#">Track Order</Link></li>
+   
           <li><Link to="/about">About Us</Link></li>
           <li><Link to="/privacy">Privacy Policy</Link></li>
           <li><Link to="/return-refund">Return & Refund Policy</Link></li>

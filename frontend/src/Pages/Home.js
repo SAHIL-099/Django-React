@@ -2,7 +2,7 @@
 import {Link} from 'react-router-dom';
 import "../Css/styles.css";
 import Authorize from './Authorize.jsx';
-import { logo, search, cart, facebook, insta, youtube, user, hard_tennis_bat, soft_tennis_bat, session_bat, grip } from './images.js';
+import { logo, cart, facebook, insta, youtube, user, hard_tennis_bat, soft_tennis_bat, session_bat, grip } from './images.js';
 
 function Home() {
     
@@ -19,11 +19,10 @@ function Home() {
                     <nav>
                         <ul>
                             <li><Link to="/">CRICKET BATS</Link></li>
-                            <li><Link to="/">ACCESSORIES</Link></li>
+                            <li><Link to="/accessories">ACCESSORIES</Link></li>
                         </ul>
                     </nav>
                     <div className="nav-icons">
-                        <Link to="#"><img src={search} alt="Search" /></Link>
                         {isAuthenticated ? (
                             <Link to="/profile"><img src={user} alt="User" /></Link>
                         ) : (
@@ -33,7 +32,7 @@ function Home() {
                     </div>
                 </div>
                 <div className="customer-support">
-                    <p>CUSTOMER SUPPORT - 1234567890 - 2244668899</p>
+                <p>Gujarat Sports</p>
                 </div>
             </header>
 
@@ -63,17 +62,15 @@ function Home() {
 
                 <section className="contact-info">
                     <h2>Our Retail Store</h2>
-                    <p>Address: Kwesports, Laam Agricultural Rd, Srinagar, Jammu and Kashmir, 191121 India</p>
-                    <p>Phone: 9149774400, 9055612325</p>
-                    <p>Email: kashmirwillows@gmail.com</p>
+                    <p>Address: A 6-7, Ambawadi, Ahmedabad Gujarat - 380006</p>
+                    <p>Phone: 1234568989, 9988454545</p>
+                    <p>Email: GujaratSports@gmail.com</p>
                     <p>Mon-Sat: 9:00am - 5:30pm, Sunday: Closed</p>
-                    <button>Get Directions</button>
                 </section>
             </main>
 
             <footer>
                 <ul>
-                    <li><Link to="#">Track Order</Link></li>
                     <li><Link to="/about">About Us</Link></li>
                     <li><Link to="/privacy">Privacy Policy</Link></li>
                     <li><Link to="/return-refund">Return & Refund Policy</Link></li>

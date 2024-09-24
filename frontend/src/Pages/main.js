@@ -15,7 +15,6 @@ import ReturnRefund from './Returnrefund';
 import Cart from './Cart';
 import Profile from './Profile';
 import Detail from './detail';
-import Logout from './logout';
 import Authorize from './Authorize';
 import Order from './Order';
 import EditProfile from './EditProfile';
@@ -41,7 +40,6 @@ function Main() {
                 <Route path='/register' element={<Register/>} />
                 <Route path='/cart' element={<Cart/>} />
                 <Route path='/profile' element={<Profile/>} />
-                <Route path='/logout' element={<Logout/>} />
                 <Route path='/detail/:id' element={<Detail/>} />
                 <Route path='/authorize' element={<Authorize/>} />
                 <Route path='/order' element={<Order/>} />

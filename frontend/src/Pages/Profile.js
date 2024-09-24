@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Authorize from './Authorize.jsx';
 import "../Css/profile.css"; 
-import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
+import { logo,  cart, facebook, insta, youtube, user } from './images.js';
 
 function Profile() {
+  const{isAuthenticated}=Authorize()
+  const navigate = useNavigate();
   const genderChoices = {
     'M': 'Male',
     'F': 'Female',
@@ -13,6 +16,20 @@ function Profile() {
   const [users, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+
+  const handleLogout = async () => {
+        try {
+            // Remove tokens from local storage
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+
+            // Redirect to login page
+            navigate('/login');
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+    };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -63,17 +80,20 @@ function Profile() {
           <nav>
             <ul>
               <li><Link to="/">CRICKET BATS</Link></li>
-              <li><Link to="/">ACCESSORIES</Link></li>
+              <li><Link to="/accessories">ACCESSORIES</Link></li>
             </ul>
           </nav>
           <div className="nav-icons">
-            <Link to="#"><img src={search} alt="Search" /></Link>
-            <Link to="/login"><img src={user} alt="User" /></Link>
+          {isAuthenticated ? (
+                            <Link to="/profile"><img src={user} alt="User" /></Link>
+                        ) : (
+                            <Link to="/login"><img src={user} alt="User" /></Link>
+                        )}
             <Link to="/cart"><img src={cart} alt="Cart" /></Link>
           </div>
         </div>
         <div className="customer-support">
-          <p>CUSTOMER SUPPORT - 1234567890 - 2244668899</p>
+        <p>Gujarat Sports</p>
         </div>
       </header>
 
@@ -94,15 +114,13 @@ function Profile() {
               <button>View Order</button>
             </Link>
           </div>
-          <Link to="/logout">
-              <p className='logout'>Logout</p>
-            </Link>
+              <p className='logout' onClick={handleLogout}>Logout</p>
         </div>
       </main>
 
       <footer>
         <ul>
-          <li><Link to="#">Track Order</Link></li>
+          
           <li><Link to="/about">About Us</Link></li>
           <li><Link to="/privacy">Privacy Policy</Link></li>
           <li><Link to="/return-refund">Return & Refund Policy</Link></li>

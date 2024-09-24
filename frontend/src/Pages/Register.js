@@ -3,7 +3,7 @@
   import "../Css/register.css"; 
   import axios from 'axios'; 
   import { useState } from 'react';
-  import { logo, search, cart, facebook, insta, youtube, user } from './images.js';
+  import { logo,  cart, facebook, insta, youtube, user } from './images.js';
 
   function Register() {
     
@@ -41,8 +41,8 @@
 
       try {
         const response = await axios.post('http://127.0.0.1:8000/register/', data, {
-          headers: { 'Content-Type': 'multipart/form-data' }, // Set header for file upload
-        });  // Replace with your backend URL
+          headers: { 'Content-Type': 'multipart/form-data' }, 
+        });  
         console.log(response.data);
         alert("User registered successfully!");
         navigate('/login');
@@ -63,17 +63,17 @@
             <nav>
               <ul>
                 <li><Link to="/">CRICKET BATS</Link></li>
-                <li><Link to="/">ACCESSORIES</Link></li>
+                <li><Link to="/accessories">ACCESSORIES</Link></li>
               </ul>
             </nav>
             <div className="nav-icons">
-              <Link to="#"><img src={search} alt="Search" /></Link>
+              {/* <Link to="#"><img src={search} alt="Search" /></Link> */}
               <Link to="/login"><img src={user} alt="User" /></Link>        
               <Link to="/cart"><img src={cart} alt="Cart" /></Link>
             </div>
           </div>
           <div className="customer-support">
-            <p>CUSTOMER SUPPORT - 1234567890 - 2244668899</p>
+          <p>Gujarat Sports</p>
           </div>
         </header>
 
@@ -115,7 +115,7 @@
 
         <footer>
           <ul>
-            <li><Link to="#">Track Order</Link></li>
+          
             <li><Link to="/about">About Us</Link></li>
             <li><Link to="/privacy">Privacy Policy</Link></li>
             <li><Link to="/return-refund">Return & Refund Policy</Link></li>
