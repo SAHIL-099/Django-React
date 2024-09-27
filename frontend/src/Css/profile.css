@@ -149,10 +149,12 @@ footer ul li a {
   .profile-actions button {
     background-color: #007bff;
     color: white;
+    transition: color 0.3s ease, background-color 0.3s ease;
     border: none;
     cursor: pointer;
-   height: 40px;
+    height: 40px;
     width: 110px; 
+    
   }
   
   .profile-actions button:hover {

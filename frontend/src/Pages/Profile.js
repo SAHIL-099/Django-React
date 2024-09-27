@@ -103,6 +103,7 @@ function Profile() {
           <div className="profile-info">
             <p><strong>Name:</strong> {users.fullname}</p>
             <p><strong>Email:</strong> {users.email}</p>
+            <p><strong>Mobile No:</strong> {users.mobile}</p>
             <p><strong>Address:</strong> {users.address}</p>
             <p><strong>Gender:</strong> {genderChoices[users.gender]}</p>
           </div>

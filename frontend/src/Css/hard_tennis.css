@@ -145,39 +145,50 @@ main .test {
     height: auto;
 }
 
-.info {
-    margin-top: 10px;
+.product .info {
+    margin-top: 0;
+    margin-left: 10px;
 }
 
-.name {
-    font-size: 1px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
 
-.price {
-    margin: 10px 0;
-    margin-left: px;
+.product .price {
+    margin-top: 1px;
+    margin-left: 0;
 }
 
 .product .original {
     text-decoration: none;
     color: #d32f2f;
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+
+.product .name {
+    font-size: 17px;
+    text-transform: capitalize;
 }
 
 
 a{
     text-decoration: none;
     color: black;
+    font-size: 18px;
 }
 
-.buttons   button{
+.product .buttons   button{
     height: 40px;
     width: 130px;
     border: none;
     border-radius: 5px;
-    margin-left: 50px;
-    background-color: #ffcc4d; 
-    color: blue; 
+    margin-left: 20px;
+    margin-top: 0px;
+    background-color: #007bff;
+    color: white;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
+
+.product .buttons button:hover {
+    background-color: #0056b3;
+  }
 

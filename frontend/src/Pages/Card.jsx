@@ -14,7 +14,7 @@ const Card = ({ product }) => {
                 quantity: 1, 
             };
             if (!userData) {
-                alert("User ID is not defined.");
+                alert("Please login To add iteam in Cart.");
                 return;
             }
 

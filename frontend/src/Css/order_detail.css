@@ -141,12 +141,14 @@ footer ul li a {
   .order-item-detail h2 {
     text-align: center;
     color: #333;
-    font-size: 28px;
+    font-size: 20px;
     margin-bottom: 20px;
     padding-bottom: 10px;
+    margin-left: 10px;
+    
   }
   
-  /* General Styling for Headers */
+ 
   .order-item-detail .oid, .order-item-detail .ost {
     color: #007bff;
     margin-bottom: 10px;
@@ -154,14 +156,13 @@ footer ul li a {
     font-size: 20px;
   }
   
-  /* Order Items List */
+  
   .order-items-list {
     list-style: none;
     padding: 0;
     margin-top: 20px;
   }
-  
-  /* Individual Order Item */
+
   .order-item {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -175,7 +176,7 @@ footer ul li a {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
   
-  /* Product Name Styling */
+
   .order-item h3 {
     color: #333;
     font-size: 18px;
@@ -183,20 +184,20 @@ footer ul li a {
     display: block;
   }
   
-  /* Ensure that product details are displayed below the product name */
+  
   .product-details {
-    display: block;  /* Ensure block display to stack elements vertically */
+    display: block;  
     line-height: 1.6;
     margin-left: 20px;
   }
   
-  /* Individual detail lines for price, quantity, and total */
+
   .product-details p {
     color: #555;
     font-size: 16px;
     text-align: left;
     display: block;
-                  /* Align text to the left to avoid centering */
+                 
   }
   
   .product-details strong {
@@ -204,7 +205,7 @@ footer ul li a {
     font-weight: bold;
   }
   
-  /* Total Amount Styling */
+
   .order-total {
     font-size: 22px;
     color: #b21d1d;
@@ -213,7 +214,7 @@ footer ul li a {
     margin-left: 23px;
   }
   
-  /* Delivery Status Styling */
+  
   .delivery-status {
     font-size: 18px;
     color: #523b3b;

@@ -131,7 +131,8 @@ footer ul li a {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 1000px;
     margin: 0 auto;
-    border: 1px solid #2c2b2b;
+    border: 1px solid #515454;
+    margin-top: 0;
 }
 
 .product-container img {
@@ -156,8 +157,8 @@ footer ul li a {
     color: #d32f2f;
 }
 
-.specifications {
-    margin-top: 6px;
+ .product-container .specifications {
+    margin-top: 0;
     margin-left:0px;
 }
 
@@ -192,10 +193,11 @@ button {
 }
 
 .addtocart {
-    background-color: #ffcc4d;
-    color: #0033cc;
+    background-color: #007bff;
+    color: white;
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.buynow {
-    background-color: #333;
+.addtocart button :hover {
+    background-color: #0056b3;
 }

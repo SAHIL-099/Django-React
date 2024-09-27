@@ -160,7 +160,9 @@ h1 {
     font-size: 1.2em;
 }
 
-
+.cart-items .item-details h3{
+    font-size: 18px;
+}
 
 .quantity {
     display: flex;

@@ -115,6 +115,7 @@ class CustomerProfileView(APIView):
             user_data = {
                 'id': profile.id,
                 'fullname': profile.fullname,
+                'mobile':profile.mobile,
                 'email': profile.email,
                 'address': profile.address,
                 'gender': profile.gender,

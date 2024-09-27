@@ -132,11 +132,11 @@ function EditProfile() {
             </div>
 
             <div className="form-group">
-              <label>Email</label>
+              <label>Mobile</label>
               <input
-                type="email"
-                name="email"
-                value={userData.email}
+                type="tel"
+                name="mobile"
+                value={userData.mobile}
                 onChange={handleInputChange}
               />
             </div>
